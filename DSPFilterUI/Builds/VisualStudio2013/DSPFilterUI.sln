@@ -1,0 +1,19 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2013
+Project("{0D1624D3-A4E9-AB0D-D7EC-A97F0A993549}") = "DSPFilterUI", "DSPFilterUI.vcxproj", "{3B524F1F-3E0F-5985-4B39-C70440C130F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B524F1F-3E0F-5985-4B39-C70440C130F2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3B524F1F-3E0F-5985-4B39-C70440C130F2}.Debug|Win32.Build.0 = Debug|Win32
+		{3B524F1F-3E0F-5985-4B39-C70440C130F2}.Release|Win32.ActiveCfg = Release|Win32
+		{3B524F1F-3E0F-5985-4B39-C70440C130F2}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
