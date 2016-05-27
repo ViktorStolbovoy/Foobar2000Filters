@@ -165,7 +165,6 @@
     <ClCompile Include="..\..\source\ChebyshevI.cpp" />
     <ClCompile Include="..\..\source\ChebyshevII.cpp" />
     <ClCompile Include="..\..\source\Custom.cpp" />
-    <ClCompile Include="..\..\source\Design.cpp" />
     <ClCompile Include="..\..\source\Documentation.cpp" />
     <ClCompile Include="..\..\source\Elliptic.cpp" />
     <ClCompile Include="..\..\source\Filter.cpp" />

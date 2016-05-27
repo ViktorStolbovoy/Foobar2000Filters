@@ -42,6 +42,8 @@ THE SOFTWARE.
 #include <stdexcept>
 
 namespace Dsp {
+#pragma warning( push )
+#pragma warning( disable : 4512 )
 
 	/*
 	 * Various forms of state information required to
@@ -301,9 +303,26 @@ namespace Dsp {
 			{
 				for (int ch = 0; ch < m_channels; ch++)
 				{
-					*samples = m_state[ch].process((double)*samples, filter);
+					*samples = (Sample) m_state[ch].process((double)*samples, filter);
 					samples ++;
 				}
+			}
+		}
+
+		template <class Filter>
+		void processSingleSampleOneChannel(double *sample, Filter& filter)
+		{
+			assert(m_channels == 1);
+			*sample = (*m_state).process(*sample, filter);
+		}
+
+		template <class Filter>
+		void processSingleSampleAllChannels(double *samples, Filter& filter)
+		{
+			for (int ch = 0; ch < m_channels; ch++)
+			{
+				*samples = m_state[ch].process(*samples, filter);
+				samples++;
 			}
 		}
 
@@ -338,6 +357,7 @@ namespace Dsp {
 
 	//------------------------------------------------------------------------------
 
+#pragma warning( pop )
 }
 
 #endif

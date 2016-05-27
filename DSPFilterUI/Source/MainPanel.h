@@ -69,7 +69,7 @@ private:
 	double getTargetSampleRate();
 	int getSourceSampleRate();
 	void resetCurrentFilterLabel();
-	void resetParameters(FSConfig * cf);
+	void resetParameters(FilterConfig * cf);
 
 private:
 	ListenerList<FilterListener> m_listeners;
@@ -83,7 +83,7 @@ private:
 	FilterControls * m_filterControls;
 	Config m_configCurrent;
 	Config *m_configMainRef;
-	ScopedPointer<Dsp::Filter> m_filter[NUM_FILTERS_ON_CHART];
+	ScopedPointer<Dsp::Filter> m_filter[2];
 };
 
 #endif

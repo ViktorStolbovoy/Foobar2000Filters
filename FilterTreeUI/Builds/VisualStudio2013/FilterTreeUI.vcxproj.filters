@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\Main.cpp" />
+    <ClCompile Include="..\..\Source\MainComponent.cpp" />
+    <ClCompile Include="..\..\Source\FilterChainItem.cpp" />
+    <ClCompile Include="..\..\Source\FilterConfigEx.cpp" />
+    <ClCompile Include="..\..\Source\PanelInputChannels.cpp" />
+    <ClCompile Include="..\..\Source\PanelOutputChannels.cpp" />
+    <ClCompile Include="..\..\Source\PanelFilterBlock.cpp" />
+    <ClCompile Include="..\..\Source\PanelFilter.cpp" />
+    <ClCompile Include="..\..\Source\PanelVOutputChannels.cpp" />
+    <ClCompile Include="..\..\Source\PanelMixer.cpp" />
+    <ClCompile Include="..\..\Source\Processor.cpp" />
+    <ClCompile Include="..\..\Source\ProcessorHelpers.cpp" />
+    <ClCompile Include="..\..\Source\ChannelTransformation.cpp" />
+    <ClCompile Include="..\..\Source\ConfigItem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\MainComponent.h" />
+    <ClInclude Include="..\..\Source\FilterChainItem.h" />
+    <ClInclude Include="..\..\Source\FilterConfigEx.h" />
+    <ClInclude Include="..\..\Source\PanelInputChannels.h" />
+    <ClInclude Include="..\..\Source\PanelOutputChannels.h" />
+    <ClInclude Include="..\..\Source\PanelFilterBlock.h" />
+    <ClInclude Include="..\..\Source\PanelFilter.h" />
+    <ClInclude Include="..\..\Source\PanelVOutputChannels.h" />
+    <ClInclude Include="..\..\Source\ColorChangeButton.h" />
+    <ClInclude Include="..\..\Source\PanelMixer.h" />
+    <ClInclude Include="..\..\Source\ConfigItem.h" />
+    <ClInclude Include="..\..\Source\BinarySerializable.h" />
+    <ClInclude Include="..\..\Source\Processor.h" />
+    <ClInclude Include="..\..\Source\ProcessorHelpers.h" />
+    <ClInclude Include="..\..\Source\ChannelTransformation.h" />
+  </ItemGroup>
+</Project>

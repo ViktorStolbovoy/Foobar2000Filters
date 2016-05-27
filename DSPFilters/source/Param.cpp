@@ -125,7 +125,7 @@ std::string ParamInfo::Int_toString (double nativeValue) const
 std::string ParamInfo::Hz_toString (double nativeValue) const
 {
   std::ostringstream os;
-  os << int (nativeValue) << " Hz";
+  os << int(nativeValue);// << " Hz";
   return os.str();
 }
 
@@ -147,7 +147,7 @@ std::string ParamInfo::Db_toString (double nativeValue) const
   else
     prec = 1;
   std::ostringstream os;
-  os << std::fixed << std::setprecision (prec) << nativeValue << " dB";
+  os << std::fixed << std::setprecision(prec) << nativeValue;// << " dB";
   return os.str();
 }
 

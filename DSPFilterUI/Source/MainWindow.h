@@ -37,6 +37,7 @@ THE SOFTWARE.
 #define DSPDEMO_MAINWINDOW_H
 
 #include "Common.h"
+#include "FilterConfig.h"
 #include "Config.h"
 
 class MainWindow : public DialogWindow

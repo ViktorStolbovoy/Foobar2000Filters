@@ -10,6 +10,44 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Source\ChannelTransformation.cpp" />
+    <ClCompile Include="..\..\Source\ConfigItem.cpp" />
+    <ClCompile Include="..\..\Source\FilterChainItem.cpp" />
+    <ClCompile Include="..\..\Source\FilterConfigEx.cpp" />
+    <ClCompile Include="..\..\Source\PanelFilter.cpp" />
+    <ClCompile Include="..\..\Source\PanelFilterBlock.cpp" />
+    <ClCompile Include="..\..\Source\PanelInputChannels.cpp" />
+    <ClCompile Include="..\..\Source\Main.cpp" />
+    <ClCompile Include="..\..\Source\MainComponent.cpp" />
+    <ClCompile Include="..\..\Source\PanelMixer.cpp" />
+    <ClCompile Include="..\..\Source\PanelOutputChannels.cpp" />
+    <ClCompile Include="..\..\Source\PanelVOutputChannels.cpp" />
+    <ClCompile Include="..\..\Source\Processor.cpp" />
+    <ClCompile Include="..\..\Source\ProcessorHelpers.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Source\BinarySerializable.h" />
+    <ClInclude Include="..\..\Source\ChannelTransformation.h" />
+    <ClInclude Include="..\..\Source\ColorChangeButton.h" />
+    <ClInclude Include="..\..\Source\ConfigItem.h" />
+    <ClInclude Include="..\..\Source\FilterChainItem.h" />
+    <ClInclude Include="..\..\Source\FilterConfigEx.h" />
+    <ClInclude Include="..\..\Source\PanelFilter.h" />
+    <ClInclude Include="..\..\Source\PanelFilterBlock.h" />
+    <ClInclude Include="..\..\Source\PanelInputChannels.h" />
+    <ClInclude Include="..\..\Source\MainComponent.h" />
+    <ClInclude Include="..\..\Source\PanelMixer.h" />
+    <ClInclude Include="..\..\Source\PanelOutputChannels.h" />
+    <ClInclude Include="..\..\Source\PanelVOutputChannels.h" />
+    <ClInclude Include="..\..\Source\Processor.h" />
+    <ClInclude Include="..\..\Source\ProcessorHelpers.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Foobar2000\SDK\Foobar2000Filters\JuceUIHelpers\Builds\VisualStudio2013\JuceUIHelpers.vcxproj">
+      <Project>{d657584e-7ea7-43a4-b742-86afb3708308}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{3B524F1F-3E0F-5985-4B39-C70440C130F2}</ProjectGuid>
     <PlatformToolset>v120</PlatformToolset>
@@ -36,17 +74,17 @@
   </PropertyGroup>
   <PropertyGroup>
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">DSPFilterUI</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">FilterTreeUIProto</TargetName>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</GenerateManifest>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">DSPFilterUI</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">FilterTreeUIProto</TargetName>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</GenerateManifest>
     <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>../../../JuceUIHelpers/Source;../../../DSPFilters/include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Prj\Foobar2000\SDK\Foobar2000Filters\DSPFilters\include;D:\Prj\Foobar2000\SDK\Foobar2000Filters\JuceUIHelpers\Source;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>../../../JuceUIHelpers/Source;../../../DSPFilters/include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Prj\Foobar2000\SDK\Foobar2000Filters\DSPFilters\include;D:\Prj\Foobar2000\SDK\Foobar2000Filters\JuceUIHelpers\Source;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -59,27 +97,29 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <AdditionalIncludeDirectories>..\..\JuceLibraryCode;..\..\..\..\..\..\JucePrapefrut\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_LIB;_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;DEBUG;_DEBUG;JUCER_VS2013_78A5020=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\JuceLibraryCode;..\..\..\JucePrapefrut\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;DEBUG;_DEBUG;JUCER_VS2013_78A5020=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <PrecompiledHeader />
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AssemblerListingLocation>$(IntDir)\</AssemblerListingLocation>
       <ObjectFileName>$(IntDir)\</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)\</ProgramDataBaseFileName>
       <WarningLevel>Level4</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Link>
-      <OutputFile>$(OutDir)\DSPFilterUI.lib</OutputFile>
+      <OutputFile>$(OutDir)\FilterTreeUIProto.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <IgnoreSpecificDefaultLibraries>libcmt.lib; msvcrt.lib;;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <ProgramDatabaseFile>$(IntDir)\DSPFilterUI.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(IntDir)\FilterTreeUIProto.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
@@ -87,7 +127,7 @@
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>$(IntDir)\DSPFilterUI.bsc</OutputFile>
+      <OutputFile>$(IntDir)\FilterTreeUIProto.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -100,28 +140,27 @@
     </Midl>
     <ClCompile>
       <Optimization>Full</Optimization>
-      <AdditionalIncludeDirectories>..\..\JuceLibraryCode;..\..\..\..\..\..\JucePrapefrut\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_LIB;_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;NDEBUG;JUCER_VS2013_78A5020=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\JuceLibraryCode;..\..\..\JucePrapefrut\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;NDEBUG;JUCER_VS2013_78A5020=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
-      <PrecompiledHeader />
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AssemblerListingLocation>$(IntDir)\</AssemblerListingLocation>
       <ObjectFileName>$(IntDir)\</ObjectFileName>
       <ProgramDataBaseFileName>$(IntDir)\</ProgramDataBaseFileName>
       <WarningLevel>Level4</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Link>
-      <OutputFile>$(OutDir)\DSPFilterUI.lib</OutputFile>
+      <OutputFile>$(OutDir)\FilterTreeUIProto.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <ProgramDatabaseFile>$(IntDir)\DSPFilterUI.pdb</ProgramDatabaseFile>
+      <ProgramDatabaseFile>$(IntDir)\FilterTreeUIProto.pdb</ProgramDatabaseFile>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
       <OptimizeReferences>true</OptimizeReferences>
@@ -130,28 +169,9 @@
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
-      <OutputFile>$(IntDir)\DSPFilterUI.bsc</OutputFile>
+      <OutputFile>$(IntDir)\FilterTreeUIProto.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="..\..\Source\Config.cpp" />
-    <ClCompile Include="..\..\Source\MainPanel.cpp" />
-    <ClCompile Include="..\..\Source\MainWindow.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\Source\Common.h" />
-    <ClInclude Include="..\..\Source\Config.h" />
-    <ClInclude Include="..\..\Source\MainPanel.h" />
-    <ClInclude Include="..\..\Source\MainWindow.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\DSPFilters\Builds\VisualStudio2010\DSPFilters.vcxproj">
-      <Project>{a34c661c-a167-4b61-8086-54957c90e800}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\JuceUIHelpers\Builds\VisualStudio2013\JuceUIHelpers.vcxproj">
-      <Project>{d657584e-7ea7-43a4-b742-86afb3708308}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />
 </Project>

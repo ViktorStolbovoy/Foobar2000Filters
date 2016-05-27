@@ -41,7 +41,6 @@ THE SOFTWARE.
 #include "GainChart.h"
 #include "GroupDelayChart.h"
 #include "MainPanel.h"
-#include "NoiseAudioSource.h"
 #include "PhaseChart.h"
 #include "PoleZeroChart.h"
 #include "StepResponseChart.h"
@@ -140,7 +139,7 @@ MainPanel::MainPanel(Config * config)
 		c->setBounds(x, y, 160, 24);
 		addToLayout(c, anchorTopLeft);
 		addAndMakeVisible(c);
-		c->addItem ("No filter", 1);
+		c->addItem ("No filter", 8);
 		c->addItem("Butterworth", 2);
 		//ctrl->addItem("Chebyshev I", 3);
 		c->addItem("Chebyshev II", 4);
@@ -182,8 +181,6 @@ MainPanel::MainPanel(Config * config)
 	x = w - gap;
 
 	const int hfc = 80;
-
-	int x1 = x - x0 + gap;
 
 	{
 		FilterControls* c = new FilterControls(m_listeners);
@@ -229,18 +226,17 @@ void MainPanel::createCharts(const Rectangle<int>& r)
 	const int w = (r.getWidth() - (2 * gap)) / 3;
 	const int h = (r.getHeight() - (2 * gap)) / 3;
 	const int w2 = w * 2 + gap; //r.getWidth()  - (w + gap);
-	const int h2 = h * 2 + gap; //r.getHeight() - (h + gap);
 
 #ifdef SIMPLE_LAYOUT //VS
 	{
-		GainChart* c = new GainChart(m_listeners);
+		GainChart* c = new GainChart(m_listeners, false);
 		c->setBounds(r.getX(), r.getY(), w2, h * 3 + gap + gap);
 		addToLayout(c, Point<int>(0, 0), Point<int>(66, 100));
 		addAndMakeVisible(c);
 	}
 
 	{
-		PhaseChart* c = new PhaseChart(m_listeners);
+		PhaseChart* c = new PhaseChart(m_listeners, false);
 
 		c->setBounds(r.getX() + w + gap + w + gap, r.getY(), w, h);
 		addToLayout(c, Point<int>(66, 0), Point<int>(100, 33));
@@ -279,7 +275,7 @@ void MainPanel::createCharts(const Rectangle<int>& r)
 
 
   {
-	  GroupDelayChart* c = new GroupDelayChart(m_listeners);
+	  GroupDelayChart* c = new GroupDelayChart(m_listeners, false);
 	  c->setBounds(r.getX() + w + gap + w + gap, r.getY() + h + gap, w, h);
 	  addToLayout(c, Point<int>(66, 33), Point<int>(100, 66));
 	  addAndMakeVisible(c);
@@ -321,10 +317,10 @@ void MainPanel::setConvertTo()
 	resetParameters(cf)	;
 }
 
-void MainPanel::resetParameters(FSConfig * cf)
+void MainPanel::resetParameters(FilterConfig * cf)
 {
-	m_menuFamily->setSelectedId(cf->FilterType, false);
-	m_convertTo->setSelectedId(cf->FMultiplier, false);
+	m_menuFamily->setSelectedId(cf->FilterType, NotificationType::dontSendNotification);
+	m_convertTo->setSelectedId(cf->FMultiplier, NotificationType::dontSendNotification);
 	createFilters();
 
 }
@@ -378,10 +374,24 @@ void MainPanel::createFilters()
 		resetCurrentFilterLabel();
 	}
 
+	std::vector<FilterData> fdv;
+	if (m_filter[0])
+	{
+		FilterData fd;
+		fd.Filter = m_filter[0];
+		fd.Color = Colours::blue;
+		fdv.push_back(fd);
+	}
 
-	Dsp::Filter * ff[NUM_FILTERS_ON_CHART];
-	for (int i = 0; i < NUM_FILTERS_ON_CHART; i++) ff[i] = m_filter[i];
-	m_listeners.call(&FilterListener::onFilterChanged, ff);
+	if (m_filter[1])
+	{
+		FilterData fd;
+		fd.Filter = m_filter[1];
+		fd.Color = Colours::green;
+		fdv.push_back(fd);
+	}
+
+	m_listeners.call(&FilterListener::onFilterChanged, fdv);
 }
 
 

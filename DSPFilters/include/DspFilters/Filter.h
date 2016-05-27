@@ -52,7 +52,20 @@ namespace Dsp {
 	 * parameters.
 	 *
 	 */
-	class Filter
+
+	class TransformBase
+	{
+	public:
+		virtual double getSampleRate() const = 0;
+		virtual complex_t response(double normalizedFrequency) const = 0;
+		virtual const float* const getStepResponse(int* numSamples) = 0;
+		virtual std::vector<PoleZeroPair> getPoleZeros() const = 0;
+		virtual ~TransformBase() {}
+	};
+
+#pragma warning( push )
+#pragma warning( disable : 4512 )
+	class Filter : public TransformBase
 	{
 	public:
 		virtual ~Filter();
@@ -71,6 +84,8 @@ namespace Dsp {
 		{
 			return m_params;
 		}
+
+		double getSampleRate() const override { return getParam(0); }//Sample rate is always first parameter 
 
 		double getParam(int paramIndex) const
 		{
@@ -99,17 +114,17 @@ namespace Dsp {
 		// of matching parameters from another set. It uses
 		// the ParamID information to make the match.
 		void copyParamsFrom(Dsp::Filter const* other);
-
-		virtual std::vector<PoleZeroPair> getPoleZeros() const = 0;
-
-		virtual complex_t response(double normalizedFrequency) const = 0;
-
-		virtual int getNumChannels() = 0;
 		virtual void reset() = 0;
+		/*virtual std::vector<PoleZeroPair> getPoleZeros() const = 0;
+		virtual complex_t response(double normalizedFrequency) const = 0; */
+		virtual const float* const getStepResponse(int* numSamples) override;
+		virtual int getNumChannels() = 0;
 		virtual void process(int numSamples, float* const* arrayOfChannels) = 0;
-		virtual void process(int numSamples, double* const* arrayOfChannels) = 0;
+		virtual void process(int numSamples, double* const* arrayOfChannels) = 0; 
 		virtual void processInterleavedSamples(int numPoints, float* samples) = 0;
 		virtual void processInterleavedSamples(int numPoints, double* samples) = 0;
+		virtual void processSingleSampleOneChannel(double *sample) = 0;
+		virtual void processSingleSampleAllChannels(double *samples) = 0;
 
 	protected:
 		virtual void doSetParams(const Params& parameters) = 0;
@@ -224,10 +239,21 @@ namespace Dsp {
 				FilterDesignBase<DesignClass>::m_design);
 		}
 
+		
 		void processInterleavedSamples(int numPoints, double* samples)
 		{
 			m_state.processInterlieavedSamples(numPoints, samples,
 				FilterDesignBase<DesignClass>::m_design);
+		}
+
+		void processSingleSampleOneChannel(double * sample)
+		{
+			m_state.processSingleSampleOneChannel(sample, FilterDesignBase<DesignClass>::m_design);
+		}
+
+		void processSingleSampleAllChannels(double * samples)
+		{
+			m_state.processSingleSampleAllChannels(samples, FilterDesignBase<DesignClass>::m_design);
 		}
 
 		void process(int numSamples, double* const* arrayOfChannels)
@@ -281,5 +307,5 @@ namespace Dsp {
 	};
 
 }
-
+#pragma warning( pop ) 
 #endif

@@ -114,4 +114,16 @@ void Filter::copyParamsFrom (Dsp::Filter const* other)
   doSetParams (m_params);
 }
 
+const float* const Filter::getStepResponse(int* numSamples)
+{
+	*numSamples = 2048;
+	float* impulse = new float[*numSamples];
+	for (int i = 0; i < 10; i++) impulse[i] = 0;
+	for (int i = 10; i < *numSamples; i++) impulse[i] = 1.0f;
+	reset();
+	process(*numSamples, &impulse);
+	return impulse;
 }
+
+}
+

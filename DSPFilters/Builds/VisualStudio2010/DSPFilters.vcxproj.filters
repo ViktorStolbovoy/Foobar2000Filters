@@ -106,9 +106,6 @@
     <ClCompile Include="..\..\source\Custom.cpp">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Design.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\Documentation.cpp">
       <Filter>source</Filter>
     </ClCompile>

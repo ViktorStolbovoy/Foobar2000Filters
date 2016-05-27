@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="VegMfb" name="FilterTreeUIProto" projectType="guiapp" version="1.0.0"
+              bundleIdentifier="com.yourcompany.FilterTreeUIProto" includeBinaryInAppConfig="1"
+              jucerVersion="4.0.2">
+  <MAINGROUP id="VCAS5X" name="FilterTreeUIProto">
+    <GROUP id="{84257F13-17D9-0226-5620-3D8794A6937D}" name="Source">
+      <FILE id="gdOm4C" name="MainComponent.cpp" compile="1" resource="0"
+            file="Source/MainComponent.cpp"/>
+      <FILE id="uEQIsK" name="MainComponent.h" compile="0" resource="0" file="Source/MainComponent.h"/>
+      <FILE id="O76N6d" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+    </GROUP>
+  </MAINGROUP>
+  <EXPORTFORMATS>
+    <VS2013 targetFolder="Builds/VisualStudio2013">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="1" optimisation="1" targetName="FilterTreeUIProto"/>
+        <CONFIGURATION name="Release" winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"
+                       isDebug="0" optimisation="3" targetName="FilterTreeUIProto"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_core" path="../JucePrapefrut/modules"/>
+        <MODULEPATH id="juce_events" path="../JucePrapefrut/modules"/>
+        <MODULEPATH id="juce_graphics" path="../JucePrapefrut/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../JucePrapefrut/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../JucePrapefrut/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../JucePrapefrut/modules"/>
+        <MODULEPATH id="juce_cryptography" path="../JucePrapefrut/modules"/>
+        <MODULEPATH id="juce_opengl" path="../JucePrapefrut/modules"/>
+        <MODULEPATH id="juce_audio_basics" path="../JucePrapefrut/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../JucePrapefrut/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../JucePrapefrut/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../JucePrapefrut/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../JucePrapefrut/modules"/>
+      </MODULEPATHS>
+    </VS2013>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_cryptography" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0"/>
+    <MODULE id="juce_opengl" showAllCode="1" useLocalCopy="0"/>
+  </MODULES>
+  <LIVE_SETTINGS>
+    <WINDOWS enableCxx11="1"/>
+  </LIVE_SETTINGS>
+  <JUCEOPTIONS/>
+</JUCERPROJECT>
