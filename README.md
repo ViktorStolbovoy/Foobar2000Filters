@@ -16,4 +16,4 @@ Following building blocks are supported:
 * Mixer - mixes all channels of selected Virtual Outputs(s) into one. Useed to create subwoofer channels
 * Virtual Output  - used to create input for mixers
 * Filer Definition - reusable chain of Filters 
-* Filter Reference - Filter DEfinition used in signal chain
+* Filter Reference - Filter Definition used in signal chain
