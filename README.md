@@ -22,3 +22,7 @@ Following building blocks are supported:
 The project uses following open source projects:
 * Nice DSP Filters library written by Vinie Falco: https://github.com/vinniefalco/DSPFilters/tree/master/shared/DSPFilters
 * Foobar2000 SDK - PC audio player of my choice for the last 10+ years. 
+
+![logo]
+
+[logo]: https://raw.githubusercontent.com/ViktorStolbovoy/Foobar2000Filters/master/filter_tree.JPG "Setup"
