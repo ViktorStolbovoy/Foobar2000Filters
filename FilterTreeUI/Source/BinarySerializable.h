@@ -112,27 +112,31 @@ protected:
 		}
 		return sizeof(float);
 	}
-	size_t Serialize(uint8 **val, uint8 *len, uint8**data, bool isWriting)
+
+	template <typename T>
+	size_t Serialize(T **val, uint8 *len, uint8**data, bool isWriting)
 	{
+		size_t sz = *len * sizeof(T);
 		if (data)
 		{
 			if (isWriting)
 			{
 				**data = *len;
 				(*data)++;
-				memcpy(*data, *val, *len);
+				memcpy(*data, *val, sz);
 			}
 			else
 			{
 				*len = **data;
 				(*data)++;
-				*val = new uint8[*len];
-				memcpy(*val, *data, *len);
+				*val = new T[*len];
+				sz = *len * sizeof(T);
+				memcpy(*val, *data, sz);
 
 			}
-			(*data) += *len;
+			(*data) += sz;
 		}
-		return *len + 1;
+		return sz + 1;
 	}
 
 	template <class ItemType>

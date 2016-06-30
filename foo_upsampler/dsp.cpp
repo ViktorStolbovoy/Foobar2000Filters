@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "DspFilters/Dsp.h"
+#include <FilterConfig.h>
 #include <Config.h>
 #include <FilterControls.h>
 #include <MainPanel.h>
@@ -51,9 +52,9 @@ class dsp_upsampler : public dsp_impl_base
 public:
 	dsp_upsampler(dsp_preset const & in) {
 		m_filterCfg.parse(in);
-		m_buffer = NULL;
+		m_buffer = nullptr;
 		m_buffer_len = 0;
-		m_filter = NULL;
+		m_filter = nullptr;
 		m_sampleRate = 0;
 		m_rateMultiplier = 1; 
 		m_channelCount = 0;

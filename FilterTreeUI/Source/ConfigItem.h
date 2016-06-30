@@ -99,21 +99,23 @@ class OutputConfigItem : public ConfigItemBase
 public:
 	OutputConfigItem() : ConfigItemBase(Output)
 	{
-		DelayMS = 0;
+		//DelayMS = 0;
 		Gain = 1;
 		OutputChannelsLenght = 0;
 		ShowInGraphs = true;
+		memset(DelaysMS, 0, MAX_NUM_CHANNELS * sizeof(float));
 	}
 
-	OutputConfigItem(OutputConfigItem *src) : ConfigItemBase(src), DelayMS(src->DelayMS), Gain(src->Gain), OutputChannelsLenght(src->OutputChannelsLenght), ShowInGraphs(src->ShowInGraphs), m_color(src->GetOutputColor())
+	OutputConfigItem(OutputConfigItem *src) : ConfigItemBase(src), Gain(src->Gain), OutputChannelsLenght(src->OutputChannelsLenght), ShowInGraphs(src->ShowInGraphs), m_color(src->GetOutputColor())
 	{
 		memcpy(OutputChannels, src->OutputChannels, MAX_NUM_CHANNELS * sizeof(uint8));
+		memcpy(DelaysMS, src->DelaysMS, MAX_NUM_CHANNELS * sizeof(float));
 	}
 	
 
 	uint8 OutputChannelsLenght = 0;
 	uint8 OutputChannels[MAX_NUM_CHANNELS];
-	float DelayMS;
+	float DelaysMS[MAX_NUM_CHANNELS];
 	float Gain;
 	bool ShowInGraphs;	 //It is just for UI, but I want to save it anyway
 	Colour GetOutputColor() const

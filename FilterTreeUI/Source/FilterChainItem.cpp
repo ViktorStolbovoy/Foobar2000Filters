@@ -79,7 +79,8 @@ var ChainItemBase::getDragSourceDescription()
 bool ChainItemBase::isInterestedInDragSource(const DragAndDropTarget::SourceDetails& dragSourceDetails) 
 {
 	auto tree = dynamic_cast<TreeView*> (dragSourceDetails.sourceComponent.get());
-	return (tree == this->getOwnerView() && CanBeParentFor(tree->getSelectedItem(0)));
+	auto selectedItem = dynamic_cast<ChainItemBase*>(tree->getSelectedItem(0));
+	return (tree == this->getOwnerView() && selectedItem && (CanBeParentFor(selectedItem) || selectedItem->HasSpecialDropAction(this)));
 }
 
 void ChainItemBase::itemDropped(const DragAndDropTarget::SourceDetails& dragSourceDetails, int insertIndex)
@@ -87,7 +88,7 @@ void ChainItemBase::itemDropped(const DragAndDropTarget::SourceDetails& dragSour
 	auto tree = dynamic_cast<TreeView*> (dragSourceDetails.sourceComponent.get());
 	if (tree == this->getOwnerView())
 	{
-		auto item = tree->getSelectedItem(0);
+		auto item = dynamic_cast<ChainItemBase*>(tree->getSelectedItem(0));
 		if (CanBeParentFor(item))
 		{
 			auto originalParent = item->getParentItem();
@@ -96,7 +97,10 @@ void ChainItemBase::itemDropped(const DragAndDropTarget::SourceDetails& dragSour
 				originalParent->removeSubItem(item->getIndexInParent(), false);
 				addSubItem(item);
 			}
+			return;
 		}
+
+		if (item) item->SpecialDropAction(this);
 	}
 }
 
@@ -215,6 +219,43 @@ String InputItem::GetLabel()
 	}
 }
 
+bool InputItem::HasSpecialDropAction(ChainItemBase *parent)
+{
+	if (IsVirtual)
+	{ 
+		auto parentCfg = dynamic_cast<ConfigItemBase*>(parent);
+		if (parentCfg)
+		{
+			switch (parentCfg->ElementType)
+			{
+				case Input:
+				{
+					auto inp = dynamic_cast<InputConfigItem *> (parent);
+					return inp && (!inp->IsVirtual || inp->InputMask != InputMask);
+				}
+				case Block:
+				case Filter:
+					//case Output:
+				case Mixer:
+					//case VirtualOutput:
+					return true;
+				default: return false;
+			}
+		}
+	}
+	return false;
+}
+
+void InputItem::SpecialDropAction(ChainItemBase *parent)
+{
+	//This may be called only if HasSpecialDropAction returns true
+	auto item = new FilterBlockItem(m_parent);
+	item->VirtualInput = InputMask;
+	parent->addSubItem(item);
+	parent->setOpen(true);
+	item->setSelected(true, true);
+}
+
 
 void OutputItem::paintHorizontalConnectingLine(Graphics& g, const Line<float>& line)
 {
@@ -246,14 +287,14 @@ String OutputItem::GetLabel()
 	{
 		if (OutputChannels[i] > 0)
 		{
-			s.add(String(OutputChannels[i]));
+			s.add(String(String::formatted("%i (%1.6f ms)", OutputChannels[i], DelaysMS[i])));
 		}
 		else
 		{
 			s.add("N/C");
 		}
 	}
-	return String(("Output: ") + s.joinIntoString(", ") + String::formatted(" (delay %1.6f ms)", DelayMS));
+	return String(("Output: ") + s.joinIntoString(", "));
 }
 
 bool OutputItem::CanBeParentFor(TreeViewItem *child)

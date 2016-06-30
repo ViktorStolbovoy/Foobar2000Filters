@@ -12,6 +12,7 @@ FilterConfigEx::FilterConfigEx()
 	Rolloff = 0.1f;
 	BandwithOrQOrSlope = 100;
 	Gain = 0;
+	PassType = HighPass;
 }
 
 Dsp::Filter * FilterConfigEx::createFilter(double fs, int numChannels) const

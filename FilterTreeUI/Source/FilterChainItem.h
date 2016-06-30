@@ -60,6 +60,8 @@ public:
 	
 	static void BuildSerializationIds(TreeViewItem *base, int *id);
 
+	virtual bool HasSpecialDropAction(ChainItemBase *parent) { return false; }
+	virtual void SpecialDropAction(ChainItemBase *parent) { }
 
 protected:
 	Colour m_lineColor;
@@ -92,9 +94,9 @@ public:
 	void paintHorizontalConnectingLine(Graphics& g, const Line<float>& line) override;
 	void paintVerticalConnectingLine(Graphics& g, const Line<float>& line) override;
 
-private:
+protected:
 	TreeViewSelectionHandler *m_parent;
-		
+private:
 	void itemSelectionChanged(bool isNowSelected)
 	{
 		if (isNowSelected) m_parent->SelectedTreeViewItemChanged(this);
@@ -135,6 +137,8 @@ public:
 		//g.drawLine(line);
 	}
 
+	virtual bool HasSpecialDropAction(ChainItemBase *parent) override;
+	virtual void SpecialDropAction(ChainItemBase *parent) override;
 protected:
 	String GetLabel() override;
 };

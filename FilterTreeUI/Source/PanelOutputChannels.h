@@ -15,10 +15,9 @@ private:
 	OutputItem *m_output;
 	Label **m_labels = nullptr;
 	ComboBox **m_selectors = nullptr;
+	TextEditor **m_editsDelay = nullptr;
 	uint8 m_numChannels = 0;
 
-	Label *m_labelDelay = nullptr;
-	TextEditor *m_editDelay = nullptr;
 	const bool m_canGraph;
 
 	TextButton *m_buttonColorSelect = nullptr;

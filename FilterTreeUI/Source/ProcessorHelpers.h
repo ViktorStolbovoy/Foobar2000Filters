@@ -23,7 +23,7 @@ public:
 	void Apply(double *data) override;
 	void CalculateResponse(Dsp::complex_t  *responses, double normalizedFrequency) override;
 	void Reset() override;
-	
+	bool IsValid() { return m_filter != nullptr; }
 private:
 	FilterConfigEx m_filterConfig;
 	Dsp::Filter * m_filter;

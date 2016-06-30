@@ -184,11 +184,15 @@ void Processor::AddFilterCommand(uint8 busIdx, ConfigItemBase * cfg, std::vector
 	uint8 channelIdx = busConfig->GetChannelIndex();
 	uint8 numChannels = busConfig->GetNumChannels();
 	auto filterCfg = dynamic_cast<FilterConfigItem *>(cfg);
-	uint32 originalId = busConfig->CurrentConfigItemId;
+	//uint32 originalId = busConfig->CurrentConfigItemId;
 	if (filterCfg)
 	{
-		commands.push_back(new FilterCommand(channelIdx, busIdx, numChannels, filterCfg->Config));
-		busConfig->CurrentConfigItemId = filterCfg->Id;
+		auto filterCommand = new FilterCommand(channelIdx, busIdx, numChannels, filterCfg->Config);
+		if (filterCommand->IsValid())
+		{
+			commands.push_back(filterCommand);
+			busConfig->CurrentConfigItemId = filterCfg->Id;
+		}
 	}
 	else
 	{
@@ -210,7 +214,8 @@ void Processor::AddFilterCommand(uint8 busIdx, ConfigItemBase * cfg, std::vector
 		}
 	}
 	
-	if (originalId == busConfig->CurrentConfigItemId) throw std::logic_error("AddCommand can't set filter command[s]");
+	//FilterBlock definition may not be assigned yet 
+	//if (originalId == busConfig->CurrentConfigItemId) throw std::logic_error("AddCommand can't set filter command[s]");
 }
 
 void Processor::AddToMixer(VirtualOutputConfigItem *vOut, std::vector<MixerConfig *> &mixers, uint8 srcChannelIndex, uint8 srcBusIdx, uint8 srcNumChannels, std::vector<CommandBase *> &commands)
@@ -380,10 +385,10 @@ uint32 Processor::FindOutputChannelsConfig(uint8 * count)
 						}
 						else
 						{
-							m_outputMap[outChIdx] = bus->GetChannelIndex(); // First channel will be diplicated if tehre is less actial channels
+							m_outputMap[outChIdx] = bus->GetChannelIndex(); // First channel will be diplicated if there are less actial channels
 						}
 
-						size_t dl = (size_t) ((m_sampleRate * outConfig->DelayMS / 1000.0) + 0.5);
+						size_t dl = (size_t) ((m_sampleRate * outConfig->DelaysMS[i] / 1000.0) + 0.5);
 						m_delayLen[outChIdx] = dl;
 						if (dl == 0)
 						{

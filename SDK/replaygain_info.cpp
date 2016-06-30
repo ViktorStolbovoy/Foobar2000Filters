@@ -6,6 +6,7 @@
 #define RG_FPU()
 #endif
 
+
 bool replaygain_info::g_format_gain(float p_value,char p_buffer[text_buffer_size])
 {
 	RG_FPU();

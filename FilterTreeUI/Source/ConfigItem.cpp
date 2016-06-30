@@ -84,14 +84,16 @@ size_t ConfigItemBase::SerializeInternal(uint8** data, bool isWriting)
 size_t OutputConfigItem::SerializeInternal(uint8** data, bool isWriting) 
 {
 	size_t sz = ConfigItemBase::SerializeInternal(data, isWriting);
-	sz += Serialize(&DelayMS, data, isWriting);
+	
 	sz += Serialize(&Gain, data, isWriting);
 	sz += Serialize(&ShowInGraphs, data, isWriting);
 	uint32 color = m_color.getARGB();
 	sz += Serialize(&color, data, isWriting);
 	m_color = Colour(color);
 	uint8 * chs = &OutputChannels[0];
-	sz += Serialize(&chs, &OutputChannelsLenght, data, isWriting);
+	sz += Serialize<uint8>(&chs, &OutputChannelsLenght, data, isWriting);
+	float * dls = &DelaysMS[0];
+	sz += Serialize<float>(&dls, &OutputChannelsLenght, data, isWriting);
 	if (!isWriting)
 	{
 		if (OutputChannelsLenght > MAX_NUM_CHANNELS) OutputChannelsLenght = MAX_NUM_CHANNELS;

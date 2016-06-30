@@ -25,6 +25,7 @@ PanelOutputChannels::PanelOutputChannels(OutputItem *output, uint32 usedOutputMa
 
 	m_labels = new Label*[m_numChannels];
 	m_selectors = new ComboBox*[m_numChannels];
+	m_editsDelay = new TextEditor*[m_numChannels];
 
 	uint32 thisMask = ConfigItemBase::ArrayToChannelMask(output->OutputChannels, output->OutputChannelsLenght);
 	thisMask |= ~usedOutputMask;
@@ -32,9 +33,9 @@ PanelOutputChannels::PanelOutputChannels(OutputItem *output, uint32 usedOutputMa
 	uint8 validChannelsLenght = 0;
 	auto validChannels = ConfigItemBase::ChannelMaskToArray(thisMask, &validChannelsLenght);
 
-	int x;
-	int y;
-	{
+	int x = X0;
+	int y = Y0;
+	/*{
 		auto c = new Label();
 		c->setText("Delay, ms: ", NotificationType::dontSendNotification);
 		c->setBounds(X0, Y0, GetLabelWidth(c), BUTTON_HEIGHT);
@@ -51,7 +52,7 @@ PanelOutputChannels::PanelOutputChannels(OutputItem *output, uint32 usedOutputMa
 
 		x = c->getRight() + GAP;
 		y = c->getBottom() + GAP;
-	}
+	} */
 
 	int x1;
 	if (m_canGraph)
@@ -62,8 +63,7 @@ PanelOutputChannels::PanelOutputChannels(OutputItem *output, uint32 usedOutputMa
 			c->setBounds(X0, y, 160, BUTTON_HEIGHT);
 			addAndMakeVisible(c);
 			m_buttonShowInGraphs = c;
-			x1 = c->getRight() + GAP;
-			if (x1 > x) x = x1;
+			x = c->getRight() + GAP;
 			y = c->getBottom() + GAP;
 		}
 
@@ -75,6 +75,7 @@ PanelOutputChannels::PanelOutputChannels(OutputItem *output, uint32 usedOutputMa
 			addAndMakeVisible(c);
 			m_labelColorSelect = c;
 			x1 = c->getRight() + GAP;
+			if (x1 > x) x = x1;
 		}
 
 		{
@@ -87,11 +88,12 @@ PanelOutputChannels::PanelOutputChannels(OutputItem *output, uint32 usedOutputMa
 		}
 	}
 
-	const int labelWidth = m_labelDelay->getFont().getStringWidth("99 (WWW): ");
+	const int NAME_WIDTH = 65;
+	y = Y0;
 	if (mixer && m_numChannels == 1)
 	{
 		//Special case for chain starting with mixer
-		AddChannelSelector("Mixed: ", &x, x, &y, labelWidth, validChannelsLenght, validChannels, 0);
+		AddChannelSelector("Mixed: ", &x, x, &y, NAME_WIDTH, validChannelsLenght, validChannels, 0);
 	}
 	else
 	{
@@ -104,7 +106,7 @@ PanelOutputChannels::PanelOutputChannels(OutputItem *output, uint32 usedOutputMa
 			for (int iy = 0; iy < NUM_ROWS && i < m_numChannels; iy++, i++)
 			{
 				uint8 chNum = inputChannels[i];
-				AddChannelSelector(ChannelNumberToAbbreviation(chNum) + ": ", &x, x1, &y, labelWidth, validChannelsLenght, validChannels, i);
+				AddChannelSelector(ChannelNumberToAbbreviation(chNum) + ": ", &x, x1, &y, NAME_WIDTH, validChannelsLenght, validChannels, i);
 				
 			}
 		}
@@ -142,6 +144,17 @@ void PanelOutputChannels::AddChannelSelector(String chName, int *x, int x1, int 
 		addAndMakeVisible(c);
 		m_selectors[index] = c;
 
+		x2 = c->getRight() + GAP;
+	}
+	{
+
+		auto c = new TextEditor();
+		c->setBounds(x2, *y, 80, BUTTON_HEIGHT);
+		addAndMakeVisible(c);
+
+
+		m_editsDelay[index] = c;
+
 		*y = c->getBottom() + GAP;
 		*x = c->getRight() + GAP;
 	}
@@ -161,16 +174,18 @@ PanelOutputChannels::~PanelOutputChannels()
 		c = m_selectors[i];
 		this->removeChildComponent(c);
 		delete c;
+
+		c = m_editsDelay[i];
+		this->removeChildComponent(c);
+		delete c;
 	}
 
 	delete[] m_selectors;
 	delete[] m_labels;
 
-	this->removeChildComponent(m_editDelay);
-	delete m_editDelay;
-	this->removeChildComponent(m_labelDelay);
-	delete m_labelDelay;
-
+	//this->removeChildComponent(m_editDelay);
+	//delete m_editDelay;
+	
 	delete m_buttonColorSelect;
 	delete m_buttonShowInGraphs;
 	delete m_labelColorSelect;
@@ -207,7 +222,6 @@ void PanelOutputChannels::comboBoxChanged(ComboBox* comboBoxThatHasChanged)
 
 void PanelOutputChannels::SetControl()
 {
-	m_output->DelayMS = m_editDelay->getText().getFloatValue();
 	m_output->OutputChannelsLenght = m_numChannels;
 
 	for (int i = 0; i < m_numChannels; i++)
@@ -215,6 +229,7 @@ void PanelOutputChannels::SetControl()
 		int id = m_selectors[i]->getSelectedId();
 		if (id == CHANNEL_NOT_SELECTED) id = 0;
 		m_output->OutputChannels[i] = (uint8) id;
+		m_output->DelaysMS[i] = m_editsDelay[i]->getText().getFloatValue();
 	}
 	
 	if (m_canGraph)
@@ -231,13 +246,13 @@ void PanelOutputChannels::SetControl()
 
 void PanelOutputChannels::ResetFromControl()
 {
-	m_editDelay->setText(String(m_output->DelayMS, 6), false);
-
 	for (int i = 0; i < m_numChannels; i++)
 	{
 		int id = m_output->OutputChannels[i];
 		if (id == 0) id = CHANNEL_NOT_SELECTED;
 		m_selectors[i]->setSelectedId(id);
+
+		m_editsDelay[i]->setText(String(m_output->DelaysMS[i], 6), false);
 	}
 	if (m_canGraph)
 	{

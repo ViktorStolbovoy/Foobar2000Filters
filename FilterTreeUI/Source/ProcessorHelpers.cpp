@@ -22,12 +22,12 @@ void FilterCommand::Apply(double *data)
 
 void FilterCommand::CalculateResponse(Dsp::complex_t  *responses, double normalizedFrequency) 
 {
-	responses[m_busIdx] *= m_filter->response(normalizedFrequency);
+	responses[m_busIdx] *= m_filter ? m_filter->response(normalizedFrequency) : 0;
 }
 
 void FilterCommand::Reset()
 {
-	m_filter->reset();
+	if (m_filter) m_filter->reset();
 }
 
 MixerCommand::MixerCommand(uint8 channelIdx, uint8 busIdx, uint8 outputBus, uint8 outputChannel, double gain, uint8 numChannels) : CommandBase(channelIdx, busIdx, numChannels), m_channelGain(gain), m_outputBus(outputBus), m_outputChannel(outputChannel) {}

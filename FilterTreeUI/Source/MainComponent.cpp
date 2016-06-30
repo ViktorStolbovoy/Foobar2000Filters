@@ -735,7 +735,7 @@ void MainContentComponent::SaveGraph()
 
 		if (selectedFile.hasWriteAccess())
 		{
-			//if (selectedFile.exists()) selectedFile.deleteFile();
+			if (selectedFileWithCorrectExtension.exists()) selectedFileWithCorrectExtension.deleteFile();
 
 			auto stream = selectedFileWithCorrectExtension.createOutputStream();
 			if (!stream->openedOk())
