@@ -188,7 +188,7 @@ void Processor::AddFilterCommand(uint8 busIdx, ConfigItemBase * cfg, std::vector
 	if (filterCfg)
 	{
 		auto filterCommand = new FilterCommand(channelIdx, busIdx, numChannels, filterCfg->Config);
-		if (filterCommand->IsValid())
+		//if (filterCommand->IsValid()) -- it will be always invalid here
 		{
 			commands.push_back(filterCommand);
 			busConfig->CurrentConfigItemId = filterCfg->Id;

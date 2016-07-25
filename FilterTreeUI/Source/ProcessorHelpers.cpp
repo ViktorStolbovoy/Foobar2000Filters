@@ -2,6 +2,7 @@
 #include <Common.h>
 #include "ConfigItem.h"
 #include "ProcessorHelpers.h"
+#include "NoPassFilter.h"
 
 
 FilterCommand::FilterCommand(uint8 channelIdx, uint8 busIdx, uint8 numChannels, FilterConfigEx fc) : CommandBase(channelIdx, busIdx, numChannels), m_filterConfig(fc), m_filter(nullptr){}
@@ -13,7 +14,9 @@ FilterCommand::~FilterCommand()
 void FilterCommand::Setup(double fs) 
 {
 	m_filter = m_filterConfig.createFilter(fs, m_numChannels);
+	if (!m_filter) m_filter = new NoPassFilter(fs, m_numChannels);
 }
+
 void FilterCommand::Apply(double *data) 
 {
 	double * chs = data + m_channelIdx;

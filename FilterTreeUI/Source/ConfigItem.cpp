@@ -97,7 +97,8 @@ size_t OutputConfigItem::SerializeInternal(uint8** data, bool isWriting)
 	if (!isWriting)
 	{
 		if (OutputChannelsLenght > MAX_NUM_CHANNELS) OutputChannelsLenght = MAX_NUM_CHANNELS;
-		memcpy(OutputChannels, chs, OutputChannelsLenght);
+		memcpy(OutputChannels, chs, OutputChannelsLenght * sizeof(OutputChannels[0]));
+		memcpy(DelaysMS, dls, OutputChannelsLenght * sizeof(DelaysMS[0]));
 	}
 
 	return sz;

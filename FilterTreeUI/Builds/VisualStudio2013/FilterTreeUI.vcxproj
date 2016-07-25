@@ -27,6 +27,7 @@
     <ClCompile Include="..\..\Source\ProcessorHelpers.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\NoPassFilter.h" />
     <ClInclude Include="..\..\Source\BinarySerializable.h" />
     <ClInclude Include="..\..\Source\ChannelTransformation.h" />
     <ClInclude Include="..\..\Source\ColorChangeButton.h" />

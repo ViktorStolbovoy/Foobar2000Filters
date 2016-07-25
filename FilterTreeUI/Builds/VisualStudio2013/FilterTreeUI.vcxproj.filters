@@ -32,5 +32,6 @@
     <ClInclude Include="..\..\Source\Processor.h" />
     <ClInclude Include="..\..\Source\ProcessorHelpers.h" />
     <ClInclude Include="..\..\Source\ChannelTransformation.h" />
+    <ClInclude Include="..\..\Source\NoPassFilter.h" />
   </ItemGroup>
 </Project>

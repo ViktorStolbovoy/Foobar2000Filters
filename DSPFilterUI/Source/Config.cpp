@@ -13,6 +13,7 @@ FilterConfig * Config::getConfigForSourceSampleRate(int sourceSampleRate)
 {
 	if (sourceSampleRate < 40000) return nullptr;
 	if (sourceSampleRate < 50000) return &FS44;
+	if (sourceSampleRate > 170000) return nullptr;
 	return &FS96;
 }
 

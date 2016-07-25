@@ -80,14 +80,23 @@ public:
 		const unsigned int chCount = chunk->get_channel_count();
 		if (m_sampleRate != sr || m_channelCount != chCount)
 		{
-			m_rateMultiplier = m_filterCfg.Data.getConfigForSourceSampleRate(sr)->FMultiplier;
+			auto cfg = m_filterCfg.Data.getConfigForSourceSampleRate(sr);
+			if (cfg)
+			{
+				m_rateMultiplier = cfg->FMultiplier;
+				m_filter = m_filterCfg.Data.createFilter(sr, chCount);
+			}
+			else
+			{
+				m_filter = nullptr;
+				m_rateMultiplier = 1;
+			}
 			m_channelCount = chCount;
 			m_sampleRate = sr;
-			m_filter = m_filterCfg.Data.createFilter(sr, chCount);
 			m_multiplier = (m_filter) ? ((m_rateMultiplier == 4) ? 2 : 1.41) : 1;
 		}
 
-		if (m_rateMultiplier < 2 && m_rateMultiplier > 8) return true;
+		if (m_rateMultiplier < 2 || m_rateMultiplier > 8) return true;
 
 		//unsigned int cconfig = chunk->get_channel_config(); - don't really care
 		audio_sample* data = chunk->get_data();
