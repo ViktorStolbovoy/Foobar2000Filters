@@ -47,10 +47,10 @@
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>..\JuceAmalgam;..\JuceUIHelpers\source;..\FilterTreeUI\source;..\DSPFilters\source;..\DSPFilters\include;..\..\..\WTL90_4140\Include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Prj\JucePrapefrut\modules;..\JuceAmalgam;..\JuceUIHelpers\source;..\FilterTreeUI\source;..\DSPFilters\source;..\DSPFilters\include;..\..\..\WTL90_4140\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>..\JuceAmalgam;..\JuceUIHelpers\source;..\FilterTreeUI\source;..\DSPFilters\source;..\DSPFilters\include;..\..\..\WTL90_4140\Include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Prj\JucePrapefrut\modules;..\JuceAmalgam;..\JuceUIHelpers\source;..\FilterTreeUI\source;..\DSPFilters\source;..\DSPFilters\include;..\..\..\WTL90_4140\Include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

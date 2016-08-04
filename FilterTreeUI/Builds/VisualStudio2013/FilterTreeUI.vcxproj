@@ -82,10 +82,10 @@
     <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\Prj\Foobar2000\SDK\Foobar2000Filters\DSPFilters\include;D:\Prj\Foobar2000\SDK\Foobar2000Filters\JuceUIHelpers\Source;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Prj\JucePrapefrut\modules;D:\Prj\Foobar2000\SDK\Foobar2000Filters\DSPFilters\include;D:\Prj\Foobar2000\SDK\Foobar2000Filters\JuceUIHelpers\Source;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>D:\Prj\Foobar2000\SDK\Foobar2000Filters\DSPFilters\include;D:\Prj\Foobar2000\SDK\Foobar2000Filters\JuceUIHelpers\Source;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Prj\JucePrapefrut\modules;D:\Prj\Foobar2000\SDK\Foobar2000Filters\DSPFilters\include;D:\Prj\Foobar2000\SDK\Foobar2000Filters\JuceUIHelpers\Source;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>

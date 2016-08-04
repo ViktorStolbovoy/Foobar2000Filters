@@ -36,6 +36,10 @@ THE SOFTWARE.
 #ifndef DSPDEMO_COMMON_H
 #define DSPDEMO_COMMON_H
 
+#ifndef JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED
+	#define JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED = 1
+#endif
+
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "../JuceLibraryCode/AppConfig.h"
 
