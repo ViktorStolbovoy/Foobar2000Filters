@@ -93,16 +93,21 @@ public:
 			}
 			m_channelCount = chCount;
 			m_sampleRate = sr;
-			m_multiplier = (m_filter) ? ((m_rateMultiplier == 4) ? 2 : 1.41) : 1;
+			m_multiplier = (m_filter) ? ((m_rateMultiplier == 4) ? 1.41 : 1.2) : 1;
 		}
-
-		if (m_rateMultiplier < 2 || m_rateMultiplier > 8) return true;
 
 		//unsigned int cconfig = chunk->get_channel_config(); - don't really care
 		audio_sample* data = chunk->get_data();
 		const t_size size = chunk->get_data_size();
-
 		const t_size sampleCnt = chunk->get_sample_count();
+
+
+		if (m_rateMultiplier < 2 || m_rateMultiplier > 8)
+		{
+			//Just run the the limiter
+			smart_limiter(size, data);
+			return true;
+		}
 
 		if (size > m_buffer_len)
 		{
@@ -129,20 +134,7 @@ public:
 
 		if (m_filter) m_filter->processInterleavedSamples(numPoints, chunk->get_data());
 
-		//"Smart" limiter
-		double overshot = 1;
-		for (int i = 0; i < numPointsTimesChannels; i ++)
-		{
-			audio_sample d = data[i];
-			if (d > overshot) overshot = d;
-			if (-d > overshot) overshot = -d;
-		}
-
-		if (overshot > 1) 
-		{
-			chunk->scale((audio_sample)(1.0 / overshot));
-			m_multiplier /= overshot;
-		}
+		smart_limiter(numPointsTimesChannels, data);
 
 		chunk->set_sample_rate(sr * m_rateMultiplier);
 
@@ -193,6 +185,20 @@ private:
 	int m_rateMultiplier;
 	int m_channelCount;
 	double m_multiplier;
+
+	void smart_limiter(int numSamplesTimesChannels, audio_sample* data)
+	{
+		for (int i = 0; i < numSamplesTimesChannels; i++)
+		{
+			audio_sample d = *(data);
+			d *= m_multiplier;
+
+			if (d > 1) m_multiplier /= d;
+			if (d < -1) m_multiplier /= -d;
+
+			*(data++) = d;
+		}
+	}
 };
 
 

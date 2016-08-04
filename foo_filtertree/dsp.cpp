@@ -202,20 +202,17 @@ public:
 			out += m_outChCount;
 		} 
 
-		//"Smart" limiter
-		double overshot = 1;
-		for (int i = 0; i < numOutSamplesTimesChannels; i++)
+		//"Smart" limiter -- use only in upsampler
+		/*for (int i = 0; i < numOutSamplesTimesChannels; i++)
 		{
-			audio_sample d = data[i];
-			if (d > overshot) overshot = d;
-			if (-d > overshot) overshot = -d;
-		}
+			audio_sample d = *(data);
+			d *= m_scale;
 
-		if (overshot > 1) 
-		{
-			chunk->scale((audio_sample)(1.0 / overshot));
-			m_scale /= overshot;
-		}
+			if (d > 1) m_scale /= d;
+			if (d < -1) m_scale /= -d;
+
+			*(data++) = d;
+		} */
 		
 		return true; //Return true to keep the chunk or false to drop it from the chain.
 	}
