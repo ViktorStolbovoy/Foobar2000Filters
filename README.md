@@ -6,7 +6,7 @@ There are 2 projects: foo_upsampler and foo_filtertree
 
 # foo_upsampler
 Changes input sample rate from 44.1, 48, 88.2 or 96kHz to 88.2, 96, 176.4 or 192kHz using integer convertion rates 2 or 4. Data with sample rates 176.4 or 192kHz passed through as is.
-The design goal was to find the best compromise between aliasing and ringing for use in R2R NOS DAC I've built. Most of the other implementation introduces use near brick wall filters which is not really necessary and produce excessive ringing.  
+The design goal was to find the best compromise between aliasing and ringing to use in R2R NOS DAC I've built. Most of the other implementations use near brick wall filter which results in ringing. More gently slopes are usually ok unless you're target is out of band (and hearing) mesuerements.  
 
 # foo_filtertree
 
