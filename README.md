@@ -16,16 +16,16 @@ The design goal was to find the best compromise between aliasing and ringing to 
 
 Flexible crossover and DRC using IIR filters. Can be used for up to 32 result channels. 
 Following building blocks are supported: 
-* Input - single or multichannel. Limited by Foobar to 32 channels
+* Input - single or multichannel. Number of channels limited by Foobar to 32.
 * Output - can be used anywhere in the chain. Supports delay. 
 * Filter - low pass, high pass, band pass, band stop, low/high/band shelf.
-* Mixer - mixes all channels of selected Virtual Outputs(s) into one. It can be used to create subwoofer channels
+* Mixer - mixes all channels of selected Virtual Output(s) into one. It can be used to create subwoofer channels
 * Virtual Output  - used to create input for mixers
 * Filer Definition - reusable chain of Filters 
-* Filter Reference - Filter Definition used in signal chain
+* Filter Reference - Filter Definition used in the signal chain
 
 #Acknowledgments
-The project uses following open source projects:
+The project uses the following open source projects:
 * Nice DSP Filters library written by Vinie Falco: https://github.com/vinniefalco/DSPFilters/tree/master/shared/DSPFilters
 * Foobar2000 SDK - PC audio player of my choice for the last 10+ years. 
 
