@@ -1,5 +1,5 @@
 # Foobar2000Filters
-##Foobar2000 Upsampler and IIR Filters##
+Foobar2000 upsampler and IIR filters
 
 Uses Butterworth, Elliptic, Bessel, Chebyshev and Legendre IIR filters
 There are 2 projects: foo_upsampler and foo_filtertree
