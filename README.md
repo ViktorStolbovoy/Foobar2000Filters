@@ -6,7 +6,7 @@ There are 2 projects: foo_upsampler and foo_filtertree
 
 # foo_upsampler
 Changes input sample rate from 44.1, 48, 88.2 or 96kHz to 88.2, 96, 176.4 or 192kHz using integer convertion rates 2 or 4. Data with sample rates 176.4 or 192kHz passed through as is.
-The design goal was to find the best compromise between aliasing and ringing to use in R2R NOS DAC I've built. Most of the other implementations use near brick wall filter which results in ringing. More gently slopes are usually ok unless you're target is out of band (and hearing) mesuerements.  
+The design goal is to find the best compromise between aliasing and ringing using R2R NOS DAC I've built. Most of the "standard" upsampling implementations use near brick wall filter which results in heavy ringing. More gently slopes are usually ok unless you care about out of band (and hearing) measuerements.  
 
 # foo_filtertree
 
@@ -14,7 +14,7 @@ The design goal was to find the best compromise between aliasing and ringing to 
 
 [logo]: https://raw.githubusercontent.com/ViktorStolbovoy/Foobar2000Filters/master/filter_tree.JPG "Setup"
 
-Flexible crossover and DRC using IIR filters. Can be used for up to 32 result channels. 
+Flexible crossover and DRC that uses IIR filters. Supports up to 32 output channels (Foobar limitation). 
 Following building blocks are supported: 
 * Input - single or multichannel. Number of channels limited by Foobar to 32.
 * Output - can be used anywhere in the chain. Supports delay. 
