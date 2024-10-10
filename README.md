@@ -5,8 +5,8 @@ Uses Butterworth, Elliptic, Bessel, Chebyshev and Legendre IIR filters
 There are 2 projects: foo_upsampler and foo_filtertree
 
 # foo_upsampler
-Changes input sample rate from 44.1, 48, 88.2 or 96kHz to 88.2, 96, 176.4 or 192kHz using integer convertion rates 2 or 4. Data with sample rates 176.4 or 192kHz passed through as is.
-The design goal is to find the best compromise between aliasing and ringing using R2R NOS DAC I've built. Most of the "standard" upsampling implementations use near brick wall filter which results in heavy ringing. More gently slopes are usually ok unless you care about out of band (and hearing) measuerements.  
+Changes input sample rate from 44.1, 48, 88.2, or 96kHz to 88.2, 96, 176.4, or 192kHz using integer conversion rates 2 or 4. Data with sample rates 176.4 or 192kHz passed through as is.
+The design goal is to find the best compromise between aliasing and ringing using R2R NOS DAC I've built. Most of the "standard" upsampling implementations use near brick wall filter which results in heavy ringing. More gentle slopes are usually ok unless you care about out-of-band (and hearing) measurements.  
 
 # foo_filtertree
 
